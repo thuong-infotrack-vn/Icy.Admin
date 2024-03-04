@@ -3,68 +3,44 @@
 	import '../app.pcss';
 	import Header from './Header.svelte';
 	import './styles.css';
-	import { BottomNav, BottomNavItem } from 'flowbite-svelte';
-	import { IconHeart } from '@tabler/icons-svelte';
+	import { BottomNav, BottomNavItem, NavBrand, Navbar, Tooltip,Button  } from 'flowbite-svelte';
+	import { IconChartHistogram, IconHeart, IconHome, IconPlus, IconSettings, IconUsers } from '@tabler/icons-svelte';
   import { page } from '$app/stores';
   $: activeUrl = $page.url.pathname;
 </script>
 
-<div class="app">
-	<Header></Header>
-
 	<main>
+		<Navbar rounded color="primary">
+			<NavBrand href="/">
+				<span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Icy</span>
+			</NavBrand>
+			<div class="flex md:order-2">
+				<Button size="sm">Ghi</Button>
+			</div>
+		</Navbar>
 		<slot />
-	</main>
-
-	<BottomNav {activeUrl} position="absolute" classInner="grid-cols-4">
-		<BottomNavItem btnName="Home" href="/">
-			<IconHeart />
-		</BottomNavItem>
-		<BottomNavItem btnName="Quickstart" href="/docs/pages/quickstart" exact={false}>
-			<IconHeart />
-		</BottomNavItem>
-		<BottomNavItem btnName="BottomNav" href="/docs/components/bottom-navigation">
-			<IconHeart />
-		</BottomNavItem>
-		<BottomNavItem btnName="Accordion" href="/docs/components/accordion">
-			<IconHeart />
-		</BottomNavItem>
-	</BottomNav>
-</div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>
+		<BottomNav position="absolute" classOuter="bottom-0 w-full rounded-none" navType="application" classInner="grid-cols-5">
+			<BottomNavItem btnName="Trang chủ" appBtnPosition="left">
+				<IconHome class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+				<Tooltip arrow={false}>Trang chủ</Tooltip>
+			</BottomNavItem>
+			<BottomNavItem btnName="Khách hàng" appBtnPosition="middle">
+				<IconUsers class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+				<Tooltip arrow={false}>Khách hàng</Tooltip>
+			</BottomNavItem>
+			<div class="flex items-center justify-center">
+				<BottomNavItem btnName="Ghi đá" appBtnPosition="middle" btnClass="inline-flex items-center justify-center w-10 h-10 font-medium bg-primary-600 rounded-full hover:bg-primary-700 group focus:ring-4 focus:ring-primary-300 focus:outline-none dark:focus:ring-primary-800">
+					<IconPlus class="text-white" />
+					<Tooltip arrow={false}>Ghi đá</Tooltip>
+				</BottomNavItem>
+			</div>
+			<BottomNavItem btnName="Thống kê" appBtnPosition="middle">
+				<IconChartHistogram class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+				<Tooltip arrow={false}>Thống kê</Tooltip>
+			</BottomNavItem>
+			<BottomNavItem btnName="Cài đặt" appBtnPosition="right">
+				<IconSettings class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
+				<Tooltip arrow={false}>Cài đặt</Tooltip>
+			</BottomNavItem>
+		</BottomNav>
+</main>
